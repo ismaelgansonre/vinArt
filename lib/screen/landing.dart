@@ -7,7 +7,6 @@ import 'package:vin/screen/home.dart';
 import 'package:vin/screen/login.dart';
 
 class LandingPage extends StatelessWidget {
-
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
 
   @override
@@ -26,7 +25,7 @@ class LandingPage extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.done) {
           return StreamBuilder(
             stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context,streamSnapshot){
+            builder: (context, streamSnapshot) {
               if (snapshot.hasError) {
                 return Scaffold(
                   body: Center(
@@ -34,34 +33,32 @@ class LandingPage extends StatelessWidget {
                   ),
                 );
               }
-              if(streamSnapshot.connectionState==ConnectionState.active){
+              if (streamSnapshot.connectionState == ConnectionState.active) {
                 //Get the user
-                User _user =streamSnapshot.data;
-                if(_user==null){
+                User _user = streamSnapshot.data;
+                if (_user == null) {
                   return LoginPage();
-                } else{
+                } else {
                   return HomePage();
                 }
               }
               return Scaffold(
                 body: Center(
                   child: Text("initilisation Application",
-                      style :Constant.regularHeading),
+                      style: Constant.regularHeading),
                 ),
               );
             },
-
           );
         }
 //
         return Scaffold(
           body: Center(
             child: Text("initilisation Application",
-                style :Constant.regularHeading),
+                style: Constant.regularHeading),
           ),
         );
       },
     );
   }
-
 }

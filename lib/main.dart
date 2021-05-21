@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+
        textTheme: GoogleFonts.poppinsTextTheme(
         Theme.of(context).textTheme,
       ),

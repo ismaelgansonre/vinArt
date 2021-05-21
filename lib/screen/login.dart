@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:vin/screen/registration.dart';
 import 'package:vin/widgets/custom_btn.dart';
 import 'package:vin/widgets/custom_input.dart';
-import '../screen/login.dart';
+
 import '../constant.dart';
+
 class LoginPage extends StatefulWidget {
-
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -32,21 +31,20 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
               Column(
-
-              children :[
-              CustomInput(
-                hintText: "Email",
-              ),
-                CustomInput(
-                  hintText: "Password",
-                ),
-                CustomBtn(
-                  text:"login",
-                  onPressed:(){
-                    print("Appuis pour se connecter");
-                  },
-                ),
-              ],
+                children: [
+                  CustomInput(
+                    hintText: "Email",
+                  ),
+                  CustomInput(
+                    hintText: "Password",
+                  ),
+                  CustomBtn(
+                    text: "login",
+                    onPressed: () {
+                      print("Appuis pour se connecter");
+                    },
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.only(
@@ -54,13 +52,13 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: CustomBtn(
                   text: "Create Nouveau compte",
-                  onPressed :(){
-                   Navigator.push(context, MaterialPageRoute(
-                       builder: (context)=>Register()
-                    ),
-                   );
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Register()),
+                    );
                   },
-                  outlineBtn :true,
+                  outlineBtn: true,
                 ),
               ),
             ],
@@ -70,5 +68,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
 }
