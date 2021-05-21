@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1042454240158",
+    "project_id": "vinart-6ce34",
+    "storage_bucket": "vinart-6ce34.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042454240158:android:29ca9b4317d0177248148f",
+        "android_client_info": {
+          "package_name": "com.vinsart.vin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042454240158-15d9o2c3elegocca9v74hqeorvgkhku2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBfF1MV9dZavBaawIHBYsIGgUYGEMtWhAI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042454240158-15d9o2c3elegocca9v74hqeorvgkhku2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
