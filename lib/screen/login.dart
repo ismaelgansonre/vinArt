@@ -33,15 +33,15 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 children: [
                   CustomInput(
-                    hintText: "Email",
+                    hintText: "Adresse e-mail",
                   ),
                   CustomInput(
-                    hintText: "Password",
+                    hintText: "Mot de passe",
                   ),
                   CustomBtn(
-                    text: "login",
+                    text: "Connexion",
                     onPressed: () {
-                      print("Appuis pour se connecter");
+                      print("Presse pour se connecter");
                     },
                   ),
                 ],
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
                   bottom: 16.0,
                 ),
                 child: CustomBtn(
-                  text: "Create Nouveau compte",
+                  text: "Creation du Nouveau compte",
                   onPressed: () {
                     Navigator.push(
                       context,

@@ -13,10 +13,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-
+//Fonts
        textTheme: GoogleFonts.poppinsTextTheme(
         Theme.of(context).textTheme,
       ),
+        accentColor: Color(0xFFFF1E00)
       ),
       home: LandingPage(),
     );
