@@ -1,7 +1,7 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:vin/screen/landing.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -14,17 +14,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
 //Fonts
-       textTheme: GoogleFonts.poppinsTextTheme(
-        Theme.of(context).textTheme,
-      ),
-        accentColor: Color(0xFFFF1E00)
-      ),
+          textTheme: GoogleFonts.poppinsTextTheme(
+            Theme.of(context).textTheme,
+          ),
+          accentColor: Color(0xFFFF1E00)),
       home: LandingPage(),
     );
   }
 }
-
-
-
-
-
