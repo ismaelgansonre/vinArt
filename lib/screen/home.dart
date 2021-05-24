@@ -1,5 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vin/tabs/Fav_tab.dart';
+import 'package:vin/tabs/home_tab.dart';
+import 'package:vin/tabs/recherche_tab.dart';
 import 'package:vin/widgets/barnavigation.dart';
 
 class HomePage extends StatefulWidget {
@@ -40,23 +43,10 @@ class _HomePageState extends State<HomePage> {
             });
           },
           children: [
-      Container(
-      child : Center(
-      child: Text (" Home Page"),
-
-    ),
-    ),
-    Container(
-    child: Center(
-    child: Text("Saved Page"),
-    ),
-    ),
-    Container(
-    child : Center(
-    child: Text (" Search Page"),
-
-    ),
-    ),
+     //HomeTab se trouve dans le dossier tabs
+        HomeTab(),
+            FavorisTab(),
+            RechercheTab(),
 ]
     ),
     ),
