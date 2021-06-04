@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:vin/widgets/custom_nav_bar.dart';
 
 class FavorisTab extends StatelessWidget {
 
@@ -7,9 +8,18 @@ class FavorisTab extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return Container(
-        child :Center(
-            child: Text("Favoris")
-        )
+      child: Stack(
+        children: [
+          Center(
+            child: Text("Favoris "),
+          ),
+          CustomActionBar(
+            title: "Favoris",
+            asUnTitre: true,
+            flecheDeRetour: false,
+          ),
+        ],
+      ),
     );
   }
 }
