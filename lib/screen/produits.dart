@@ -3,6 +3,7 @@ import 'package:vin/widgets/custom_nav_bar.dart';
 import 'package:vin/widgets/image_swipe.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:vin/widgets/taille_produits.dart';
 
 class ProductPage extends StatefulWidget {
   final String productId;
@@ -15,7 +16,7 @@ class ProductPage extends StatefulWidget {
 
 class _ProductPageState extends State<ProductPage> {
   final CollectionReference _productsRef =
-  FirebaseFirestore.instance.collection("Produits");
+      FirebaseFirestore.instance.collection("Produits");
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +40,14 @@ class _ProductPageState extends State<ProductPage> {
 
                 // List of images
                 List imageList = documentData["images"];
+                List productSizeList = documentData["size"];
 
                 return ListView(
                   padding: EdgeInsets.all(0),
                   children: [
-                    ImageSwipe(imageList: imageList,),
+                    ImageSwipe(
+                      imageList: imageList,
+                    ),
                     Padding(
                       padding: const EdgeInsets.only(
                         top: 24.0,
@@ -88,9 +92,53 @@ class _ProductPageState extends State<ProductPage> {
                         horizontal: 24.0,
                       ),
                       child: Text(
-                        "Select Capacity",
+                        "Selectionner la  Capacité",
                         style: Constant.regularDarkText,
                       ),
+                    ),
+                    ProductSize(
+                      productSizeList: productSizeList,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(
+                              color: Color(0xffdcdcdc),
+                              borderRadius: BorderRadius.circular(9.0)),
+                          alignment: Alignment.center,
+                          child: Image(
+                            image: AssetImage("assets/img/tab_saved.png"),
+                            height: 22.0,
+                          ),
+                          height: 65.0,
+                          width: 65.0,
+                          /*alignment: Alignment.center,*/
+                        ),
+                        Expanded(
+                          child: GestureDetector(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(12.0)),
+                              child: Text(
+                                'Add To Cart',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 16.0),
+                              ),
+                              height: 65.0,
+                              alignment: Alignment.center,
+                              margin: EdgeInsets.only(left: 16.0),
+                            ),
+                            onTap: () async {
+                              /* await _addToCart();*/
+                              /*Scaffold.of(context).showSnackBar(_snackBar);*/
+                            },
+                          ),
+                        )
+                      ],
+                      mainAxisAlignment: MainAxisAlignment.start,
                     ),
                   ],
                 );
