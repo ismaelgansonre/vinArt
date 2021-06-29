@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vin/constant.dart';
 import 'package:vin/widgets/custom_nav_bar.dart';
 import 'package:vin/widgets/image_swipe.dart';
@@ -17,6 +18,25 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   final CollectionReference _productsRef =
       FirebaseFirestore.instance.collection("Produits");
+
+  final CollectionReference _usersRef = FirebaseFirestore
+      .instance
+      .collection("Users");
+
+  User _user = FirebaseAuth.instance.currentUser;
+
+  String _selectedProductSize = "0";
+
+  Future _addToCart() {
+    return _usersRef
+        .doc(_user.uid)
+        .collection("Cart")
+        .doc(widget.productId)
+        .set({"size": _selectedProductSize});
+  }
+
+  final SnackBar _snackBar = SnackBar(content: Text("Produit dans le panier !"),);
+
 
   @override
   Widget build(BuildContext context) {
@@ -98,48 +118,60 @@ class _ProductPageState extends State<ProductPage> {
                     ),
                     ProductSize(
                       productSizeList: productSizeList,
+                      onSelected: (size) {
+                        _selectedProductSize = size;
+                      },
                     ),
-                    Row(
-                      children: [
-                        Container(
-                          decoration: BoxDecoration(
-                              color: Color(0xffdcdcdc),
-                              borderRadius: BorderRadius.circular(9.0)),
-                          alignment: Alignment.center,
-                          child: Image(
-                            image: AssetImage("assets/img/tab_saved.png"),
-                            height: 22.0,
-                          ),
-                          height: 65.0,
-                          width: 65.0,
-                          /*alignment: Alignment.center,*/
-                        ),
-                        Expanded(
-                          child: GestureDetector(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(12.0)),
-                              child: Text(
-                                'Add To Cart',
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16.0),
-                              ),
-                              height: 65.0,
-                              alignment: Alignment.center,
-                              margin: EdgeInsets.only(left: 16.0),
+
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 65.0,
+                            height: 65.0,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFDCDCDC),
+                              borderRadius: BorderRadius.circular(12.0),
                             ),
-                            onTap: () async {
-                              /* await _addToCart();*/
-                              /*Scaffold.of(context).showSnackBar(_snackBar);*/
-                            },
+                            alignment: Alignment.center,
+                            child: Image(
+                              image: AssetImage(
+                                "assets/img/tab_saved.png",
+                              ),
+                              height: 22.0,
+                            ),
                           ),
-                        )
-                      ],
-                      mainAxisAlignment: MainAxisAlignment.start,
-                    ),
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () async {
+                                await _addToCart();
+                                Scaffold.of(context).showSnackBar(_snackBar);
+                              },
+                              child: Container(
+                                height: 65.0,
+                                margin: EdgeInsets.only(
+                                  left: 16.0,
+                                ),
+                                decoration: BoxDecoration(
+                                  color: Colors.black,
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                alignment: Alignment.center,
+                                child: Text(
+                                  "Add To Cart",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
                   ],
                 );
               }
