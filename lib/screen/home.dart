@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:vin/package/firebase_services.dart';
 import 'package:vin/tabs/Fav_tab.dart';
 import 'package:vin/tabs/home_tab.dart';
 import 'package:vin/tabs/recherche_tab.dart';
@@ -12,11 +13,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  FirebaseServices _firebaseServices = FirebaseServices();
+
   PageController _tabsPageController;
   int _selectedTab = 0;
 
   @override
   void initState() {
+
     _tabsPageController = PageController();
     super.initState();
   }

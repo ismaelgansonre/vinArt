@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vin/constant.dart';
+import 'package:vin/package/firebase_services.dart';
 import 'package:vin/widgets/custom_nav_bar.dart';
 import 'package:vin/widgets/image_swipe.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -16,6 +17,9 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  FirebaseServices _firebaseServices = FirebaseServices();
+
+
   final CollectionReference _productsRef =
       FirebaseFirestore.instance.collection("Produits");
 
@@ -23,13 +27,13 @@ class _ProductPageState extends State<ProductPage> {
       .instance
       .collection("Users");
 
-  User _user = FirebaseAuth.instance.currentUser;
+
 
   String _selectedProductSize = "0";
 
   Future _addToCart() {
-    return _usersRef
-        .doc(_user.uid)
+    return _firebaseServices.usersRef
+        .doc(_firebaseServices.getUserId())
         .collection("Cart")
         .doc(widget.productId)
         .set({"size": _selectedProductSize});
@@ -44,7 +48,7 @@ class _ProductPageState extends State<ProductPage> {
       body: Stack(
         children: [
           FutureBuilder(
-            future: _productsRef.doc(widget.productId).get(),
+            future: _firebaseServices.productsRef.doc(widget.productId).get(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Scaffold(
@@ -61,7 +65,8 @@ class _ProductPageState extends State<ProductPage> {
                 // List of images
                 List imageList = documentData["images"];
                 List productSizeList = documentData["size"];
-
+// set initial size
+                _selectedProductSize = productSizeList[0];
                 return ListView(
                   padding: EdgeInsets.all(0),
                   children: [

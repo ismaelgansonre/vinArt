@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vin/constant.dart';
+import 'package:vin/package/firebase_services.dart';
 
 class CustomActionBar extends StatelessWidget {
 final String title;
@@ -11,17 +12,19 @@ final bool asUnTitre;
 
   final bool hasBack;
 CustomActionBar({this.title,this.flecheDeRetour,this.asUnTitre,this.hasBack});
+FirebaseServices _firebaseServices = FirebaseServices();
+
+final CollectionReference _usersRef = FirebaseFirestore
+    .instance
+    .collection("Users");
+
 
   @override
   Widget build(BuildContext context) {
     bool _flecheDeRetour=flecheDeRetour ?? false;
     bool _asUnTitre = asUnTitre ?? true;
     bool _hasBack = hasBack ?? true;
-    final CollectionReference _usersRef = FirebaseFirestore
-        .instance
-        .collection("Users");
 
-    User _user = FirebaseAuth.instance.currentUser;
    return Container(
      decoration: BoxDecoration(
        gradient: _hasBack? LinearGradient(
@@ -84,7 +87,7 @@ if(asUnTitre)
         ),
         alignment: Alignment.center,
     child: StreamBuilder(
-    stream: _usersRef.doc(_user.uid).collection("Cart").snapshots(),
+    stream: _usersRef.doc(_firebaseServices.getUserId()).collection("Cart").snapshots(),
     builder: (context, snapshot) {
     int _totalItems = 0;
 
