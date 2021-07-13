@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:vin/constant.dart';
 import 'package:vin/package/firebase_services.dart';
+import 'package:vin/screen/panier.dart';
 
 class CustomActionBar extends StatelessWidget {
 final String title;
@@ -70,22 +71,33 @@ if(_flecheDeRetour)
     ),
        ),
 
-if(asUnTitre)
+if(_asUnTitre)
      Text(
        title ?? "Bar d'action",
 
       style: Constant.boldHeading,
       ),
 
-      Container(
-        width: 42.0,
-        height: 42.0,
-        decoration: BoxDecoration(
-          color: Colors.black,
-          borderRadius: BorderRadius.circular(8.0),
+      GestureDetector(
+        onTap:(){
+Navigator.push(context,MaterialPageRoute(builder: (context)=> CartPage()));
+    },
+        child: GestureDetector(
+          onTap: (){
+            Navigator.push(context, MaterialPageRoute(
+                builder:(context)=> CartPage(),
+            ));
 
-        ),
-        alignment: Alignment.center,
+          },
+          child: Container(
+            width: 42.0,
+            height: 42.0,
+            decoration: BoxDecoration(
+              color: Colors.black,
+              borderRadius: BorderRadius.circular(8.0),
+
+            ),
+            alignment: Alignment.center,
     child: StreamBuilder(
     stream: _usersRef.doc(_firebaseServices.getUserId()).collection("Cart").snapshots(),
     builder: (context, snapshot) {
@@ -106,6 +118,8 @@ if(asUnTitre)
     );
     },
     ),
+          ),
+        ),
       )
        ]
       ),
